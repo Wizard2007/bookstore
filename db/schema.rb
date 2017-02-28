@@ -10,11 +10,67 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224000417) do
+ActiveRecord::Schema.define(version: 20170227234944) do
 
-  create_table "posts", force: :cascade do |t|
+  create_table "authors", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "second_name"
+    t.text     "description"
+    t.boolean  "is_active"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "books", force: :cascade do |t|
     t.string   "title"
-    t.text     "text"
+    t.text     "description"
+    t.decimal  "price"
+    t.boolean  "is_active"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string   "number"
+    t.string   "name"
+    t.string   "mm"
+    t.string   "yy"
+    t.string   "cvv"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "is_active"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.decimal  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "email"
+    t.string   "password"
+    t.boolean  "is_admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
