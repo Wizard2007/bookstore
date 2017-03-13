@@ -1,3 +1,3 @@
 class Order < ApplicationRecord
-  has_one: user, optional: true
+  belong_to :user, optional: true
 end
