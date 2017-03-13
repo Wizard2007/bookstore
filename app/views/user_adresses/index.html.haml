@@ -1,0 +1,19 @@
+%h1 Listing user_adresses
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @user_adresses.each do |user_adress|
+      %tr
+        %td= link_to 'Show', user_adress
+        %td= link_to 'Edit', edit_user_adress_path(user_adress)
+        %td= link_to 'Destroy', user_adress, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User adress', new_user_adress_path

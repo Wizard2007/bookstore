@@ -1,0 +1,19 @@
+%h1 Listing user_phones
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @user_phones.each do |user_phone|
+      %tr
+        %td= link_to 'Show', user_phone
+        %td= link_to 'Edit', edit_user_phone_path(user_phone)
+        %td= link_to 'Destroy', user_phone, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New User phone', new_user_phone_path

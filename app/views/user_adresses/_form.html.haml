@@ -1,0 +1,10 @@
+= form_for @user_adress do |f|
+  - if @user_adress.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user_adress.errors.count, "error")} prohibited this user_adress from being saved:"
+      %ul
+        - @user_adress.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'
