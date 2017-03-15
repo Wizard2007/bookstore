@@ -4,8 +4,8 @@
       t.timestamp :date
 =end
 class Review < ApplicationRecord
-  belong_to :user, optional: true
+  belongs_to :user, optional: true
   # need add migration
   # rails g migration AddReviewItemRefToBooks review:references
-  belong_to :book, optional: true
+  belongs_to :book, optional: true
 end

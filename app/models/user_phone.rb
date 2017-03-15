@@ -3,5 +3,5 @@
       t.boolean :is_active
 =end
 class UserPhone < ApplicationRecord
-  belong_to :user, optional: true
+  belongs_to :user, optional: true
 end

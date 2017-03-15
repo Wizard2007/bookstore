@@ -5,5 +5,5 @@
       t.boolean :is_active
 =end
 class UserAdress < ApplicationRecord
-  belong_to :user
+  belongs_to :user
 end

@@ -5,6 +5,6 @@
       t.boolean :is_active
 =end
 class Book < ApplicationRecord
-  belong_to :author, optional: true
-  belong_to :category, optional true
+  belongs_to :author, optional: true
+  belongs_to :category, optional true
 end
