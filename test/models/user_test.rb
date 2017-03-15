@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
 end
+
+RSpec.describe Card, 'Test Card' do
+  subject {Card.new}
+  
+ end
