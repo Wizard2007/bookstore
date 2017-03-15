@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228002942) do
+ActiveRecord::Schema.define(version: 20170315223356) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
@@ -26,12 +26,16 @@ ActiveRecord::Schema.define(version: 20170228002942) do
     t.text     "description"
     t.decimal  "price"
     t.boolean  "is_active"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "author_id"
     t.integer  "category_id"
+    t.integer  "order_item_id"
+    t.integer  "review_id"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["category_id"], name: "index_books_on_category_id"
+    t.index ["order_item_id"], name: "index_books_on_order_item_id"
+    t.index ["review_id"], name: "index_books_on_review_id"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -56,22 +60,28 @@ ActiveRecord::Schema.define(version: 20170228002942) do
 
   create_table "order_items", force: :cascade do |t|
     t.decimal  "price"
+    t.decimal  "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "order_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.string   "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal  "total"
     t.integer  "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
     t.datetime "date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
@@ -100,9 +110,10 @@ ActiveRecord::Schema.define(version: 20170228002942) do
     t.string   "first_name"
     t.string   "email"
     t.string   "password"
+    t.string   "confirmation"
     t.boolean  "is_admin"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end
