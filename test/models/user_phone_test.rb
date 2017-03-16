@@ -8,7 +8,7 @@ RSpec.describe UserPhone, 'Test UserPhone' do
   context '# start testing Card properties' do        
     [:phone,:is_active].each do |name|
       it "Should respond to #(name.to_s)" {should respond_to(name)}
-	end
+    end
   end  
   context '# start testing Phone:' do
     it 'Should not be empty.' do

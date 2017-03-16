@@ -4,15 +4,21 @@ class UserTest < ActiveSupport::TestCase
 end
 
 RSpec.describe User, 'Test Card' do
+  before do
+    @user = User.new{first_name: 'Test name',last_name: 'Test LastName'
+      , email: 'test@mail.ru', password: 'test password'
+      , confirmation: 'test password', is_admin: true}
+  end
   subject {User.new}
   context '# start testing Card properties' do        
-    [:first_name,:email,:password,:confirmation,:is_admin].each do |name|
-      it "Should respond to #(name.to_s)" {should respond_to(name)}
-	end
+    [:first_name,:last_name,:email,:password,:confirmation,:is_admin].each do |name|
+      it "Should respond to #(name.to_s)" {should respond_to(name)}    	
+    end
   end    
   context '# start testing Email field:' do
     it 'Should not be not empty.' do
-      pending "add some examples to (or delete) #{__FILE__}"
+      @user.email = " "
+      it { should_not be_valid }      
     end
     it 'Has a localpart on the left of an @, the domain on the right. Neither the localpart nor the domain can be empty.' do
       pending "add some examples to (or delete) #{__FILE__}"
@@ -24,7 +30,8 @@ RSpec.describe User, 'Test Card' do
       pending "add some examples to (or delete) #{__FILE__}"
     end
     it 'Labels must be less than 63 characters.' do
-      pending "add some examples to (or delete) #{__FILE__}"
+      @user.email = 64*'*'
+      it { should_not be_valid }      
     end	
     it 'Labels must not start with a hyphen, end with a hyphen, or contain two successive hyphens.' do
       pending "add some examples to (or delete) #{__FILE__}"
