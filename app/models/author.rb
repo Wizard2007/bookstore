@@ -5,5 +5,5 @@
       t.boolean :is_active
 =end
 class Author < ApplicationRecord
-  has_many :books, optional: true
+  has_many :books
 end
