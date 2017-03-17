@@ -19,3 +19,7 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# ignore tmp folder
+/app/views/layouts_tmp
+/app/views/user_tmp
