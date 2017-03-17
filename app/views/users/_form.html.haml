@@ -5,8 +5,10 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
+<% for attribute in attributes -%>
   .field
-    = f.label :title
-    = f.text_field :title
+    = f.label :<%= attribute.name %>
+    = f.<%= attribute.field_type %> :<%= attribute.name %>
+<% end -%>
   .actions
     = f.submit 'Save'
