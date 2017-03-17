@@ -6,10 +6,6 @@ hamle
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-
-= for attribute in attributes
-  .field
-    = f.label :attribute.name
-    = f.attribute.field_type :attribute.name 
+ 
   .actions
     = f.submit 'Save'
