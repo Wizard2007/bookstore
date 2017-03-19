@@ -3,21 +3,21 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 end
 
-RSpec.describe User, 'Test Card' do
+RSpec.describe User, ' testing ' do
   before do
     @user = User.new{first_name: 'Test name',last_name: 'Test LastName'
       , email: 'test@mail.ru', password: 'test password'
       , confirmation: 'test password', is_admin: true}
   end
-  subject {User.new}
+  subject {@user}
   context '# start testing Card properties' do        
     [:first_name,:last_name,:email,:password,:confirmation,:is_admin].each do |name|
       it "Should respond to #(name.to_s)" {should respond_to(name)}    	
     end
   end    
   context '# start testing Email field:' do
-    it 'Should not be not empty.' do
-      @user.email = " "
+    describe 'Should not be not empty.' do
+      before (@user.email = " ")
       it { should_not be_valid }      
     end
     it 'Has a localpart on the left of an @, the domain on the right. Neither the localpart nor the domain can be empty.' do
