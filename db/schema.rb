@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170315223356) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "authors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "second_name"
@@ -32,10 +35,10 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.integer  "category_id"
     t.integer  "order_item_id"
     t.integer  "review_id"
-    t.index ["author_id"], name: "index_books_on_author_id"
-    t.index ["category_id"], name: "index_books_on_category_id"
-    t.index ["order_item_id"], name: "index_books_on_order_item_id"
-    t.index ["review_id"], name: "index_books_on_review_id"
+    t.index ["author_id"], name: "index_books_on_author_id", using: :btree
+    t.index ["category_id"], name: "index_books_on_category_id", using: :btree
+    t.index ["order_item_id"], name: "index_books_on_order_item_id", using: :btree
+    t.index ["review_id"], name: "index_books_on_review_id", using: :btree
   end
 
   create_table "cards", force: :cascade do |t|
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_cards_on_user_id"
+    t.index ["user_id"], name: "index_cards_on_user_id", using: :btree
   end
 
   create_table "categories", force: :cascade do |t|
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "order_id"
-    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
   end
 
   create_table "orders", force: :cascade do |t|
@@ -73,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "updated_at", null: false
     t.decimal  "total"
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_reviews_on_user_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
   end
 
   create_table "user_adresses", force: :cascade do |t|
@@ -94,7 +97,7 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_user_adresses_on_user_id"
+    t.index ["user_id"], name: "index_user_adresses_on_user_id", using: :btree
   end
 
   create_table "user_phones", force: :cascade do |t|
@@ -103,11 +106,12 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.index ["user_id"], name: "index_user_phones_on_user_id"
+    t.index ["user_id"], name: "index_user_phones_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
     t.string   "password"
     t.string   "confirmation"
@@ -116,4 +120,14 @@ ActiveRecord::Schema.define(version: 20170315223356) do
     t.datetime "updated_at",   null: false
   end
 
+  add_foreign_key "books", "authors"
+  add_foreign_key "books", "categories"
+  add_foreign_key "books", "order_items"
+  add_foreign_key "books", "reviews"
+  add_foreign_key "cards", "users"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "user_adresses", "users"
+  add_foreign_key "user_phones", "users"
 end
