@@ -1,25 +1,26 @@
-require 'test_helper'
+require '../test_helper'
 
 class UserTest < ActiveSupport::TestCase
 end
 
 RSpec.describe User, ' testing ' do
   before do
-    @user = User.new{first_name: 'Test name',last_name: 'Test LastName'
-      , email: 'test@mail.ru', password: 'test password'
-      , confirmation: 'test password', is_admin: true}
+    @user = User.new(first_name: 'Test name', last_name: 'Test LastName', email: 'test@mail.ru', password: 'test password' , confirmation: 'test password', is_admin: true)
   end
   subject {@user}
   context '# start testing Card properties' do        
     [:first_name,:last_name,:email,:password,:confirmation,:is_admin].each do |name|
-      it "Should respond to #(name.to_s)" {should respond_to(name)}    	
+      it {should respond_to(name)}    	
     end
+    it {should be_valid}
   end    
+
+  describe 'Should not be not empty.' do
+    before {@user.email = " "}
+    it { should_not be_valid }
+  end
+
   context '# start testing Email field:' do
-    describe 'Should not be not empty.' do
-      before (@user.email = " ")
-      it { should_not be_valid }      
-    end
     it 'Has a localpart on the left of an @, the domain on the right. Neither the localpart nor the domain can be empty.' do
       pending "add some examples to (or delete) #{__FILE__}"
     end
@@ -29,10 +30,11 @@ RSpec.describe User, ' testing ' do
     it 'Labels consist of a-z, A-Z, 0-9, or one of !#$%&\'*+-/=?^_`{|}~.' do
       pending "add some examples to (or delete) #{__FILE__}"
     end
-    it 'Labels must be less than 63 characters.' do
-      @user.email = 64*'*'
-      it { should_not be_valid }      
-    end	
+
+    describe 'Labels must be less than 63 characters.' do
+      before{@user.email = '*'*64}
+      it { should_not be_valid }
+    end
     it 'Labels must not start with a hyphen, end with a hyphen, or contain two successive hyphens.' do
       pending "add some examples to (or delete) #{__FILE__}"
     end
@@ -76,4 +78,4 @@ RSpec.describe User, ' testing ' do
       pending "add some examples to (or delete) #{__FILE__}"
     end
   end
- end
+end
